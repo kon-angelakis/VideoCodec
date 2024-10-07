@@ -14,7 +14,7 @@ SEARCH_RADIUS = 8
 video = 'Raw.mkv'
 frames, fps = video2frames(video)
 
-print("---First Part---")
+print("---No motion compensation---")
 
 I_frames, P_frames = calculate_ip_frames(frames, I_FRAMES_REPEAT)
 
@@ -25,11 +25,11 @@ decoded_frames = decode_frames(encoded_frames)
 frames2video(decoded_frames, 'Edited.mkv', fps)
 edited_video = 'Edited.mkv'
 
-print("---Second Part---")
+print("---Motion compensation---")
 
 vectors = vectors_exhaustive_motion(frames, I_FRAMES_REPEAT, MACROBLOCK_SIZE, SEARCH_RADIUS)
 
-print("---Fourth Part---")
+print("---Compression---")
 
 #Compare the original and encoded video file sizes to find out the compression rate
 original_size = os.path.getsize(video)
